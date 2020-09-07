@@ -4,9 +4,9 @@ import pandas as pd
 # path to resume training
 RESUME_WEIGHT = None # "./fold0/checkpoints/train.55.pth"
 
-INIT_LR    = 1e-4
-NUM_EPOCHS = 25
-NUM_CYCLES = 1   # NUM_CYCLES for CosineAnnealingLR scheduler
+INIT_LR    = 7.5e-4
+NUM_EPOCHS = 100
+NUM_CYCLES = 3   # NUM_CYCLES for CosineAnnealingLR scheduler
 
 
 model_config = {

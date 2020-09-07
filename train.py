@@ -37,16 +37,17 @@ warnings.simplefilter("ignore")
 class PANNsLoss(nn.Module):
     def __init__(self):
         super().__init__()
-        # self.bce = nn.BCELoss()
+        self.bce = nn.BCELoss()
         self.bce_logit = nn.BCEWithLogitsLoss()  # BCEWithLogitsLoss more stable
 
     def forward(self, input, target):
-        input_ = input["clipwise_output"]  # logit
-        # input_ = torch.where(torch.isnan(input_), torch.zeros_like(input_), input_)
-        # input_ = torch.where(torch.isinf(input_), torch.zeros_like(input_), input_)
+        input_ = input["clipwise_output"]  # sigmoid
+        input_ = torch.where(torch.isnan(input_), torch.zeros_like(input_), input_)
+        input_ = torch.where(torch.isinf(input_), torch.zeros_like(input_), input_)
 
         target = target.float()
-        return self.bce_logit(input_, target)
+        # return self.bce_logit(input_, target)
+        return self.bce(input_, target)
 
 
 def train_model():
@@ -125,11 +126,11 @@ def train_model():
 
     # Load Pretrained Weight
     model.load_state_dict(weights["model"])
-    model.att_block = AttBlock(2048, 264, activation='linear')
+    model.att_block = AttBlock(2048, 264, activation='sigmoid')
     model.att_block.init_weights()
 
     ###################################################################
-    model.load_state_dict(torch.load("./fold0/checkpoints/train.14.pth")["model_state_dict"])
+    # model.load_state_dict(torch.load("./fold0/checkpoints/train.14.pth")["model_state_dict"])
     ###################################################################
 
 
@@ -142,7 +143,7 @@ def train_model():
     # Scheduler
     NUM_EPOCHS = global_config.NUM_EPOCHS
     NUM_CYCLES = int(NUM_EPOCHS/(2*global_config.NUM_CYCLES))
-    scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=NUM_EPOCHS)
+    scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=NUM_CYCLES)
 
     # Loss
     criterion = PANNsLoss().to(device)
