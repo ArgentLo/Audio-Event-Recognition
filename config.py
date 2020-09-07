@@ -2,9 +2,11 @@ import pandas as pd
 
 
 # path to resume training
-RESUME_WEIGHT = None # "/home/argent/kaggle/Cornell_BirdSong_Reg/fold0/checkpoints/train.55_full.pth"
+RESUME_WEIGHT = None # "./fold0/checkpoints/train.55.pth"
 
-INIT_LR = 8e-4
+INIT_LR    = 1e-4
+NUM_EPOCHS = 25
+NUM_CYCLES = 1   # NUM_CYCLES for CosineAnnealingLR scheduler
 
 
 model_config = {
