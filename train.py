@@ -147,7 +147,6 @@ def train_model():
     # Loss
     criterion = PANNsLoss().to(device)
     
-
     # Resume
     if global_config.RESUME_WEIGHT:
         # callbacks
