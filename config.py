@@ -2,7 +2,7 @@ import pandas as pd
 
 
 # path to resume training
-RESUME_WEIGHT = "/home/argent/kaggle/Cornell_BirdSong_Reg/fold0/checkpoints/train.55_full.pth"
+RESUME_WEIGHT = None # "/home/argent/kaggle/Cornell_BirdSong_Reg/fold0/checkpoints/train.55_full.pth"
 
 INIT_LR = 8e-4
 
