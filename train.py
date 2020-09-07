@@ -163,7 +163,6 @@ def train_model():
             CheckpointCallback(save_n_best=5)  # save 5 best models
         ]
 
-
     # Model Training
     runner = SupervisedRunner(
         device=device,
