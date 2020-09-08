@@ -220,7 +220,7 @@ if __name__ == '__main__':
     # get optimizer
     optimizer = getattr(torch.optim, settings["optimizer"]["name"])(model.parameters(), **settings["optimizer"]["params"])
     scheduler = getattr(torch.optim.lr_scheduler, settings["scheduler"]["name"])(optimizer, **settings["scheduler"]["params"])
-    loss_func = getattr(nn, settings["loss"]["name"])(**settings["loss"]["params"])
+    loss_func = BCEWithLogitsLoss_LabelSmooth() # getattr(nn, settings["loss"]["name"])(**settings["loss"]["params"])
     trigger = None
 
     if global_config.FP16:
