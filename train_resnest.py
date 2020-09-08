@@ -37,6 +37,7 @@ from apex import amp  # mix-presicion training
 import config as global_config
 from dataset import SpectrogramDataset, INV_BIRD_CODE
 from utils import *
+from loss_func import BCEWithLogitsLoss_LabelSmooth, FocalLoss
 import warnings
 warnings.simplefilter("ignore")
 

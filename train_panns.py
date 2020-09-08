@@ -31,23 +31,9 @@ from dataset import PANNsDataset, INV_BIRD_CODE
 from model import PANNsCNN14Att
 from model_layers import AttBlock, ConvBlock
 from utils import *
+from loss_func import PANNsLoss
 import warnings
 warnings.simplefilter("ignore")
-
-class PANNsLoss(nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.bce = nn.BCELoss()
-        self.bce_logit = nn.BCEWithLogitsLoss()  # BCEWithLogitsLoss more stable
-
-    def forward(self, input, target):
-        input_ = input["clipwise_output"]  # sigmoid
-        input_ = torch.where(torch.isnan(input_), torch.zeros_like(input_), input_)
-        input_ = torch.where(torch.isinf(input_), torch.zeros_like(input_), input_)
-
-        target = target.float()
-        # return self.bce_logit(input_, target)
-        return self.bce(input_, target)
 
 
 def train_model():
