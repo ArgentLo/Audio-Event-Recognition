@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.utils.data as data
 import resnest.torch as resnest_torch
-
+ 
 
 class BCEWithLogitsLoss_LabelSmooth(nn.Module):
     def __init__(self, label_smoothing=0.1, pos_weight=None):
