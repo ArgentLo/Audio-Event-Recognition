@@ -1,13 +1,67 @@
 import pandas as pd
 
 
+SETTINGS_STR = """
+globals:
+  seed: 1213
+  device: cuda
+  num_epochs: 50
+  output_dir: ./fold0/
+  use_fold: 0
+  target_sr: 32000
+
+dataset:
+  name: SpectrogramDataset
+  params:
+    img_size: 224
+    melspectrogram_parameters:
+      n_mels: 128
+      fmin: 20
+      fmax: 16000
+    
+loader:
+  train:
+    batch_size: 64
+    shuffle: True
+    num_workers: 2
+    pin_memory: True
+    drop_last: True
+  val:
+    batch_size: 64
+    shuffle: False
+    num_workers: 2
+    pin_memory: True
+    drop_last: False
+
+model:
+  name: resnest50_fast_1s1x64d
+  params:
+    pretrained: True
+    n_classes: 264
+
+loss:
+  name: BCEWithLogitsLoss
+  params: {}
+
+optimizer:
+  name: Adam
+  params:
+    lr: 0.001
+
+scheduler:
+  name: CosineAnnealingLR
+  params:
+    T_max: 20
+"""
+
+
 # path to resume training
 RESUME_WEIGHT = None # "./fold0/checkpoints/train.55.pth"
 
 INIT_LR    = 7.5e-4
 NUM_EPOCHS = 100
 NUM_CYCLES = 3   # NUM_CYCLES for CosineAnnealingLR scheduler
-
+FP16       = True
 
 model_config = {
     "sample_rate": 32000,

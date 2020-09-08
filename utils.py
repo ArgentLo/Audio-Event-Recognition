@@ -28,6 +28,68 @@ from sklearn.metrics import f1_score, average_precision_score
 import warnings
 warnings.simplefilter("ignore")
 
+
+def set_seed(seed: int = 42):
+    random.seed(seed)
+    np.random.seed(seed)
+    os.environ["PYTHONHASHSEED"] = str(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)  # type: ignore
+    torch.backends.cudnn.deterministic = True  # type: ignore
+    torch.backends.cudnn.benchmark = True  # type: ignore
+
+
+@contextmanager
+def timer(name: str) -> None:
+    """Timer Util"""
+    t0 = time.time()
+    print("[{}] start".format(name))
+    yield
+    print("[{}] done in {:.0f} s".format(name, time.time() - t0))
+
+    
+def get_logger(out_file=None):
+    logger = logging.getLogger()
+    formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+    logger.handlers = []
+    logger.setLevel(logging.INFO)
+
+    handler = logging.StreamHandler()
+    handler.setFormatter(formatter)
+    handler.setLevel(logging.INFO)
+    logger.addHandler(handler)
+
+    if out_file is not None:
+        fh = logging.FileHandler(out_file)
+        fh.setFormatter(formatter)
+        fh.setLevel(logging.INFO)
+        logger.addHandler(fh)
+    logger.info("logger set up")
+    return logger
+    
+    
+
+
+
+#####################################################################
+##################       For PANNs CNN14 models       ###############
+#####################################################################
+
+# @contextmanager
+# def timer(name: str, logger: Optional[logging.Logger] = None):
+#     t0 = time.time()
+#     msg = f"[{name}] start"
+#     if logger is None:
+#         print(msg)
+#     else:
+#         logger.info(msg)
+#     yield
+#     msg = f"[{name}] done in {time.time() - t0:.2f} s"
+#     if logger is None:
+#         print(msg)
+#     else:
+#         logger.info(msg)
+
 # Metrics Callback (F1 score, mAP) for Catalyst.Runner()
 class F1Callback(Callback):
     def __init__(self,
@@ -112,60 +174,6 @@ class mAPCallback(Callback):
                                 self.prefix] = score
         else:
             state.epoch_metrics["train_epoch_" + self.prefix] = score
-
-
-def set_seed(seed: int = 42):
-    random.seed(seed)
-    np.random.seed(seed)
-    os.environ["PYTHONHASHSEED"] = str(seed)
-    torch.manual_seed(seed)
-    torch.cuda.manual_seed(seed)  # type: ignore
-    torch.backends.cudnn.deterministic = True  # type: ignore
-    torch.backends.cudnn.benchmark = True  # type: ignore
-    
-    
-def get_logger(out_file=None):
-    logger = logging.getLogger()
-    formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
-    logger.handlers = []
-    logger.setLevel(logging.INFO)
-
-    handler = logging.StreamHandler()
-    handler.setFormatter(formatter)
-    handler.setLevel(logging.INFO)
-    logger.addHandler(handler)
-
-    if out_file is not None:
-        fh = logging.FileHandler(out_file)
-        fh.setFormatter(formatter)
-        fh.setLevel(logging.INFO)
-        logger.addHandler(fh)
-    logger.info("logger set up")
-    return logger
-    
-    
-@contextmanager
-def timer(name: str, logger: Optional[logging.Logger] = None):
-    t0 = time.time()
-    msg = f"[{name}] start"
-    if logger is None:
-        print(msg)
-    else:
-        logger.info(msg)
-    yield
-
-    msg = f"[{name}] done in {time.time() - t0:.2f} s"
-    if logger is None:
-        print(msg)
-    else:
-        logger.info(msg)
-
-
-
-#####################################################################
-#############   From audioset_tagging_cnn.pytorch_utils   ###########
-#####################################################################
-
 
 
 def move_data_to_device(x, device):

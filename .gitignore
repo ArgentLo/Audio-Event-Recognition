@@ -2,7 +2,9 @@
 __pycache__/ 
 __pycache__/*
 fold0/
-
+training_output/
+fold0/*
+training_output/*
 *.py[cod] 
 *$py.class 
 settings.json
