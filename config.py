@@ -46,12 +46,12 @@ loss:
 optimizer:
   name: Adam
   params:
-    lr: 0.008
+    lr: 0.001
 
 scheduler:
   name: CosineAnnealingLR
   params:
-    T_max: 10
+    T_max: 5
 """
 
 
