@@ -47,8 +47,8 @@ def get_model(args: tp.Dict):
     del model.fc
     # use the same head as the baseline notebook.
     model.fc = nn.Sequential(
-        nn.Linear(2048, 1024), nn.ReLU(), nn.Dropout(p=0.2),
-        nn.Linear(1024, 1024), nn.ReLU(), nn.Dropout(p=0.2),
+        nn.Linear(2048, 1024), nn.ReLU(), nn.Dropout(p=0.4),
+        nn.Linear(1024, 1024), nn.ReLU(), nn.Dropout(p=0.4),
         nn.Linear(1024, args["params"]["n_classes"]))
     return model
 
@@ -73,7 +73,7 @@ def train_loop(manager, args, model, device, train_loader,
                 else:
                     loss.backward()                         # compute and sum gradients on params
                 optimizer.step()
-            scheduler.step()  # scheduler might be wrong position (but reportedly better perf.)
+                scheduler.step()  # scheduler might be wrong position (but reportedly better perf.)
 
 
 def eval_for_batch(args, model, device, data, target, 
@@ -98,8 +98,10 @@ def get_loaders_for_training(args_dataset: tp.Dict, args_loader: tp.Dict,
                              train_file_list: tp.List[str], val_file_list: tp.List[str]):
     
     # # make dataset
-    train_dataset = SpectrogramDataset_Augmentation(train_file_list, **args_dataset)
-    val_dataset   = SpectrogramDataset_Augmentation(val_file_list, **args_dataset)
+    # train_dataset = SpectrogramDataset_Augmentation(train_file_list, **args_dataset)
+    # val_dataset   = SpectrogramDataset_Augmentation(val_file_list, **args_dataset)
+    train_dataset = SpectrogramDataset(train_file_list, **args_dataset)
+    val_dataset   = SpectrogramDataset(val_file_list, **args_dataset)
     # # make dataloader
     train_loader = data.DataLoader(train_dataset, **args_loader["train"])
     val_loader = data.DataLoader(val_dataset, **args_loader["val"])

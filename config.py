@@ -5,7 +5,7 @@ SETTINGS_STR = """
 globals:
   seed: 1213
   device: cuda
-  num_epochs: 100
+  num_epochs: 60
   output_dir: ./fold0/
   use_fold: 0
   target_sr: 32000
@@ -21,9 +21,9 @@ dataset:
     
 loader:
   train:
-    batch_size: 128
+    batch_size: 16
     shuffle: True
-    num_workers: 16
+    num_workers: 2
     pin_memory: True
     drop_last: True
   val:
@@ -34,7 +34,7 @@ loader:
     drop_last: False
 
 model:
-  name: resnest50_fast_1s1x64d
+  name: resnest101
   params:
     pretrained: True
     n_classes: 264
@@ -46,14 +46,14 @@ loss:
 optimizer:
   name: Adam
   params:
-    lr: 0.0008
+    lr: 0.001
 
 scheduler:
   name: CosineAnnealingLR
   params:
     T_max: 20
 """
-
+# resnest50_fast_1s1x64d
 
 # path to resume training
 RESUME_WEIGHT = None # "./fold0/checkpoints/train.55.pth"
