@@ -47,8 +47,8 @@ def get_model(args: tp.Dict):
     del model.fc
     # use the same head as the baseline notebook.
     model.fc = nn.Sequential(
-        nn.Linear(2048, 1024), nn.ReLU(), nn.Dropout(p=0.4),
-        nn.Linear(1024, 1024), nn.ReLU(), nn.Dropout(p=0.4),
+        nn.Linear(2048, 1024), nn.ReLU(), nn.Dropout(p=0.1),
+        nn.Linear(1024, 1024), nn.ReLU(), nn.Dropout(p=0.1),
         nn.Linear(1024, args["params"]["n_classes"]))
     return model
 
