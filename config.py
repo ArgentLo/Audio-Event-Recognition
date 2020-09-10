@@ -5,7 +5,7 @@ SETTINGS_STR = """
 globals:
   seed: 1213
   device: cuda
-  num_epochs: 60
+  num_epochs: 80
   output_dir: ./fold0/
   use_fold: 0
   target_sr: 32000
@@ -51,7 +51,7 @@ optimizer:
 scheduler:
   name: CosineAnnealingLR
   params:
-    T_max: 20
+    T_max: 10
 """
 # resnest50_fast_1s1x64d
 
