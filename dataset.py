@@ -12,6 +12,12 @@ from pathlib import Path
 import typing as tp
 from typing import Optional, List
 import cv2
+import random
+
+import torch
+import torchaudio
+from torchaudio import transforms
+from spec_augmentation import *
 
 BIRD_CODE = {
     'aldfly': 0, 'ameavo': 1, 'amebit': 2, 'amecro': 3, 'amegfi': 4,
@@ -142,6 +148,68 @@ class SpectrogramDataset(data.Dataset):
             pass
 
         image = mono_to_color(melspec)
+        height, width, _ = image.shape
+        image = cv2.resize(image, (int(width * self.img_size / height), self.img_size))
+        image = np.moveaxis(image, 2, 0)
+        image = (image / 255.0).astype(np.float32)
+
+        # labels = np.zeros(len(BIRD_CODE), dtype="i")
+        labels = np.zeros(len(BIRD_CODE), dtype="f")
+        labels[BIRD_CODE[ebird_code]] = 1
+
+        return image, labels
+
+
+class SpectrogramDataset_Augmentation(data.Dataset):
+    def __init__(
+        self,
+        file_list: tp.List[tp.List[str]], img_size=224,
+        waveform_transforms=None, spectrogram_transforms=True, melspectrogram_parameters={}
+    ):
+        self.file_list = file_list  # list of list: [file_path, ebird_code]
+        self.img_size = img_size
+        self.waveform_transforms = waveform_transforms
+        self.spectrogram_transforms = spectrogram_transforms
+        self.melspectrogram_parameters = melspectrogram_parameters
+
+    def __len__(self):
+        return len(self.file_list)
+
+    def __getitem__(self, idx: int):
+        wav_path, ebird_code = self.file_list[idx]
+
+        y, sr = torchaudio.load(wav_path)
+#         print("Y shape:", y.shape)
+        if self.waveform_transforms:
+            y = self.waveform_transforms(y)
+        else:
+            len_y = y.shape[1]
+            effective_length = sr * PERIOD
+            if len_y < effective_length:
+                # new_y = np.zeros(effective_length, dtype=y.dtype)
+                # start = np.random.randint(effective_length - len_y)
+                new_y = torch.zeros([1, effective_length], dtype=y.dtype)
+                start = torch.randint(low=0,high=(effective_length-len_y),size=(1,)) 
+                new_y[0, start:start + len_y] = y
+                y = new_y.type(torch.float)
+            elif len_y > effective_length:
+                # start = np.random.randint(len_y - effective_length)
+                start = torch.randint(low=0,high=(len_y - effective_length),size=(1,)) 
+                y = y[0, start:start + effective_length].type(torch.float)
+            else:
+                y = y.type(torch.float)
+#         print("After Y shape:", y.shape)
+        melspec = tfm_spectro(y)  # to mel_spectrogram and power_to_db
+#         melspec = librosa.feature.melspectrogram(y, sr=sr, **self.melspectrogram_parameters)
+#         melspec = librosa.power_to_db(melspec).astype(np.float32)
+        if self.spectrogram_transforms:
+            melspec = time_mask(freq_mask(time_warp(melspec), num_masks=2), num_masks=2)
+        else:
+            pass
+        melspec = torch.squeeze(melspec, 0)
+        image = mono_to_color(melspec)
+#         print("Image shape:", image.shape)
+        
         height, width, _ = image.shape
         image = cv2.resize(image, (int(width * self.img_size / height), self.img_size))
         image = np.moveaxis(image, 2, 0)

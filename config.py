@@ -21,9 +21,9 @@ dataset:
     
 loader:
   train:
-    batch_size: 16
+    batch_size: 128
     shuffle: True
-    num_workers: 2
+    num_workers: 16
     pin_memory: True
     drop_last: True
   val:
@@ -34,7 +34,7 @@ loader:
     drop_last: False
 
 model:
-  name: resnest101
+  name: resnest50_fast_1s1x64d
   params:
     pretrained: True
     n_classes: 264
