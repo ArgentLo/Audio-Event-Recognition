@@ -47,8 +47,8 @@ def get_model(args: tp.Dict):
     del model.fc
     # use the same head as the baseline notebook.
     model.fc = nn.Sequential(
-        nn.Linear(2048, 1024), nn.LeakyReLU(negative_slope=0.02), nn.Dropout(p=0.1),
-        nn.Linear(1024, 1024), nn.LeakyReLU(negative_slope=0.02), nn.Dropout(p=0.1),
+        nn.Linear(2048, 1024), nn.LeakyReLU(negative_slope=0.02), nn.Dropout(p=0.2),
+        nn.Linear(1024, 1024), nn.LeakyReLU(negative_slope=0.02), nn.Dropout(p=0.2),
         nn.Linear(1024, args["params"]["n_classes"]))
     return model
 
@@ -222,7 +222,7 @@ if __name__ == '__main__':
     # get optimizer
     optimizer = getattr(torch.optim, settings["optimizer"]["name"])(model.parameters(), **settings["optimizer"]["params"])
     scheduler = getattr(torch.optim.lr_scheduler, settings["scheduler"]["name"])(optimizer, **settings["scheduler"]["params"])
-    loss_func = BCEWithLogitsLoss_LabelSmooth() # getattr(nn, settings["loss"]["name"])(**settings["loss"]["params"])
+    loss_func = FocalLoss() # BCEWithLogitsLoss_LabelSmooth() # getattr(nn, settings["loss"]["name"])(**settings["loss"]["params"])
     trigger = None
 
     if global_config.FP16:

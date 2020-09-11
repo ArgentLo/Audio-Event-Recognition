@@ -34,7 +34,7 @@ loader:
     drop_last: False
 
 model:
-  name: resnest101
+  name: resnest50_fast_1s1x64d
   params:
     pretrained: True
     n_classes: 264
@@ -51,7 +51,7 @@ optimizer:
 scheduler:
   name: CosineAnnealingLR
   params:
-    T_max: 10
+    T_max: 20
 """
 # resnest50_fast_1s1x64d
 
