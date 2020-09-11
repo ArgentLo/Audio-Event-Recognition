@@ -21,7 +21,7 @@ dataset:
     
 loader:
   train:
-    batch_size: 16
+    batch_size: 64
     shuffle: True
     num_workers: 2
     pin_memory: True
