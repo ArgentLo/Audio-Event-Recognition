@@ -1,6 +1,5 @@
 import pandas as pd
 
-
 SETTINGS_STR = """
 globals:
   seed: 1213
