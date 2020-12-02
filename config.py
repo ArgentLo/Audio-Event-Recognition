@@ -32,6 +32,7 @@ loader:
     num_workers: 2
     pin_memory: True
     drop_last: False
+    
 
 model:
   name: resnest50_fast_1s1x64d
