@@ -39,6 +39,7 @@ model:
     pretrained: True
     n_classes: 264
 
+
 loss:
   name: BCEWithLogitsLoss
   params: {}
