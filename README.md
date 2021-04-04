@@ -7,7 +7,7 @@ Model details:
 - ["PANNs: Large-Scale Pretrained Audio Neural Networks for Audio Pattern Recognition"](https://arxiv.org/abs/1912.10211)
 
 
-<img src="https://github.com/ArgentLo/Audio-Event-Recognition/blob/master/imgs/sound_0.png" width="845" height="432">
+<img src="https://github.com/ArgentLo/Audio-Event-Recognition/blob/master/imgs/sound_0.png" width="505" height="260">
 
 
 ----
