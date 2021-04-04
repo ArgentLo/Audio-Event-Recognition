@@ -1,13 +1,3 @@
-import cv2
-import audioread
-import logging
-import os
-import random
-import time
-
-import librosa
-import librosa.display as display
-import numpy as np
 import pandas as pd
 import soundfile as sf
 import torch
@@ -18,7 +8,6 @@ import torch.utils.data as data
 
 from contextlib import contextmanager
 from pathlib import Path
-from typing import Optional, List
 
 from catalyst.dl import SupervisedRunner, State, CallbackOrder, Callback, CheckpointCallback
 from fastprogress import progress_bar
