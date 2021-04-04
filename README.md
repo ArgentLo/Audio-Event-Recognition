@@ -6,9 +6,9 @@ Model details:
 - ["ResNeSt: Split-Attention Networks"](https://arxiv.org/abs/2004.08955)
 - ["PANNs: Large-Scale Pretrained Audio Neural Networks for Audio Pattern Recognition"](https://arxiv.org/abs/1912.10211)
 
-
+<p align="center">
 <img src="https://github.com/ArgentLo/Audio-Event-Recognition/blob/master/imgs/sound_0.png" width="505" height="260">
-
+<\p>
 
 ----
 
