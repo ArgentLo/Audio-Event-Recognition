@@ -4,7 +4,7 @@ This is a Audio-Event Recognition framework based on `Deep CNN models`, specific
 
 
 <p align="center">
-    <img align="center" src="https://github.com/ArgentLo/Audio-Event-Recognition/blob/master/imgs/sound_0.png" width="570" height="292.5">
+    <img align="center" src="https://github.com/ArgentLo/Audio-Event-Recognition/blob/master/imgs/sound_0.png" width="530" height="272">
 </p>
 
 ## Overall Framework
@@ -21,13 +21,15 @@ This is a Audio-Event Recognition framework based on `Deep CNN models`, specific
 
   ➔ `Mel Spectrogram`
 
-- **Train CNN models** on `Mel Spectrogram` to classify each Audio Event.
+- **Train CNN models** on the 2D `Mel Spectrogram`, just like training on any other images, to classify each Audio Event.
+    
+    - CNN Models are very flexible and proven to be effective in finding patterns in 2D data.
 
-  - **CNN Model details**:
+    - **CNN Model details**:
 
-    - Standard CNN model: ["ResNeSt: Split-Attention Networks"](https://arxiv.org/abs/2004.08955)
+        - Standard CNN model: ["ResNeSt: Split-Attention Networks"](https://arxiv.org/abs/2004.08955)
 
-    - Audio-specialized CNN model: ["PANNs: Large-Scale Pretrained Audio Neural Networks for Audio Pattern Recognition"](https://arxiv.org/abs/1912.10211)
+        - Audio-specialized CNN model: ["PANNs: Large-Scale Pretrained Audio Neural Networks for Audio Pattern Recognition"](https://arxiv.org/abs/1912.10211)
 
 
 ----
