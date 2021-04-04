@@ -7,8 +7,9 @@ Model details:
 - ["PANNs: Large-Scale Pretrained Audio Neural Networks for Audio Pattern Recognition"](https://arxiv.org/abs/1912.10211)
 
 <p align="center">
-<img src="https://github.com/ArgentLo/Audio-Event-Recognition/blob/master/imgs/sound_0.png" width="505" height="260">
-<\p>
+    <img align="center" src="https://github.com/ArgentLo/Audio-Event-Recognition/blob/master/imgs/sound_0.png" width="380" height="195">
+</p>
+
 
 ----
 
@@ -35,12 +36,16 @@ tqdm
 
 
 
+**Sound Wave Visualization**
+<p align="center">
+    <img src="https://github.com/ArgentLo/Audio-Event-Recognition/blob/master/imgs/sound_1.png" width="668" height="420">
+</p>
 
+**Mel Spectrogram Visualization**
+<p align="center">
+    <img src="https://github.com/ArgentLo/Audio-Event-Recognition/blob/master/imgs/mel_spec.png" width="680" height="420">
+</p>
 
-<img src="https://github.com/ArgentLo/Audio-Event-Recognition/blob/master/imgs/sound_1.png" width="720" height="192.6">
-
-
-<img src="https://github.com/ArgentLo/Audio-Event-Recognition/blob/master/imgs/mel_spec.png" width="720" height="192.6">
 
 
 
