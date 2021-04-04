@@ -23,9 +23,9 @@ This is a Audio-Event Recognition framework based on `Deep CNN models`, specific
 
 - **Train CNN models** on the 2D `Mel Spectrogram`, just like training on any other images, to classify each Audio Event.
     
-    - CNN Models are very flexible and proven to be effective in finding patterns in 2D data.
+    - CNN Models are very **flexible** and proven to be **effective in finding patterns in 2D data**.
 
-    - **CNN Model details**:
+    - CNN Model details:
 
         - Standard CNN model: ["ResNeSt: Split-Attention Networks"](https://arxiv.org/abs/2004.08955)
 
