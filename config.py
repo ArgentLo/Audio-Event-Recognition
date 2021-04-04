@@ -75,8 +75,9 @@ model_config = {
 
 SR = 32000  # sampling rate
 
-ROOT = "/home/argent/kaggle/Cornell_BirdSong_Reg/"
-DATA_PATH = ROOT + "datasets/"
+ROOT = "./"
+DATA_PATH      = ROOT + "datasets/"
+PRETRAIN_PANNS = ROOT + "pretrained_models"
 
 # train
 RAW_TRAIN_AUDIO_PATH = DATA_PATH + "raw_train_audio/"
@@ -85,5 +86,5 @@ train_csv = pd.read_csv(RESAMPLED_TRAIN_AUDIO_PATH + "train_mod.csv")
 
 # test
 # TEST_AUDIO_DIR = DATA_PATH + "test_audio/"
-TEST_AUDIO_DIR = DATA_PATH + "test_birdcall_check/test_audio/"
-test_csv = pd.read_csv(DATA_PATH + "test_birdcall_check/test.csv")
+TEST_AUDIO_DIR = DATA_PATH + "test_data/test_audio/"
+test_csv = pd.read_csv(DATA_PATH + "test_data/test.csv")

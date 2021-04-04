@@ -97,7 +97,7 @@ def train_model():
     # model
     global_config.model_config["classes_num"] = 527
     model = PANNsCNN14Att(**global_config.model_config)
-    weights = torch.load("/home/argent/kaggle/Cornell_BirdSong_Reg/pretrained_models/Cnn14_DecisionLevelAtt_mAP_0.425.pth")
+    weights = torch.load(PRETRAIN_PANNS)
 
     # Load Pretrained Weight
     model.load_state_dict(weights["model"])
