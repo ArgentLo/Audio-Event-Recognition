@@ -2,11 +2,12 @@
 
 This is a Audio-Event Recognition framework based on `Deep CNN models`, specifically `ResNeSt` and `PANNs` model.
 
+
 <p align="center">
-    <img align="center" src="https://github.com/ArgentLo/Audio-Event-Recognition/blob/master/imgs/sound_0.png" width="380" height="195">
+    <img align="center" src="https://github.com/ArgentLo/Audio-Event-Recognition/blob/master/imgs/sound_0.png" width="570" height="292.5">
 </p>
 
-### Overall Framework
+## Overall Framework
 
 - [Sample Datasets](https://www.kaggle.com/c/birdsong-recognition/data?select=train_audio) ("Audio Event":  simply means audio-clip that has length >0s).
 
@@ -31,7 +32,7 @@ This is a Audio-Event Recognition framework based on `Deep CNN models`, specific
 
 ----
 
-### Quick Start
+## Quick Start
 
 - **Environment Requirement**
 
@@ -63,21 +64,22 @@ python train_panns.py
 
 ----
 
-### Audio Data Visualization
+## Audio Data Visualization
 
 - **Sound Wave Visualization**
-    - 
-<p align="center">
-    <img src="https://github.com/ArgentLo/Audio-Event-Recognition/blob/master/imgs/sound_1.png" width="668" height="420">
-</p>
+    - A sound wave consists of alternating compressions and rarefactions, or regions of high pressure and low pressure, moving at a certain speed. 
+    
+    <p align="center">
+        <img src="https://github.com/ArgentLo/Audio-Event-Recognition/blob/master/imgs/sound_1.png" width="467.6" height="294">
+    </p>
 
 - **Mel Spectrogram Visualization**
     - A spectrogram is a visual way of representing the signal strength, or “loudness”, of a signal over time at various frequencies present in a particular waveform. Not only can one see whether there is more or less energy at, for example, 2 Hz vs 10 Hz, but one can also see how energy levels vary over time.
     - The Mel Spectrogram is a normal Spectrogram, but with a Mel Scale on the y axis.
 
-<p align="center">
-    <img src="https://github.com/ArgentLo/Audio-Event-Recognition/blob/master/imgs/mel_spec.png" width="680" height="420">
-</p>
+    <p align="center">
+        <img src="https://github.com/ArgentLo/Audio-Event-Recognition/blob/master/imgs/mel_spec.png" width="476" height="294">
+    </p>
 
 
 
